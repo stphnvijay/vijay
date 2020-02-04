@@ -10,8 +10,34 @@ package com.digitallschool.training.spiders.spring_boot1;
  * @author stphnvijay07
  */
 public class Items {
-    public static void main(String[] args) {
-        System.out.println("stephen");
+   private int authorId;
+   private String name;
+
+    public Items() {
     }
+
+    public Items(int authorId, String name) {
+        this.authorId = authorId;
+        this.name = name;
+    }
+
+    public int getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(int authorId) {
+        this.authorId = authorId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+   
+    
+   
     
 }
