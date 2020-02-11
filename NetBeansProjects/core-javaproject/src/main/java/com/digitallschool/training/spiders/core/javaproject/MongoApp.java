@@ -16,6 +16,7 @@ import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import static com.mongodb.client.model.Filters.*;
+
 /**
  *
  * @author stphnvijay07com.mongodb.client
@@ -23,6 +24,30 @@ import static com.mongodb.client.model.Filters.*;
 public class MongoApp {
 
     public static void main(String[] args) {
+
+        MongoClient client = MongoClients.create("mongodb://vijay:vijay@db.bassure.guruofjava.com/vijay");
+        CodecRegistry codec = CodecRegistries.fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
+                CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+        MongoDatabase db = client.getDatabase("vijay");
+        MongoCollection<Candidate> collection = db.getCollection("candidate", Candidate.class).withCodecRegistry(codec);
+//        Consumer<Candidate> candit = e -> candidates.add(e);
+        Consumer<Candidate> candit = e -> System.out.println(e);
+        collection.find().forEach(candit);
+
+    }
+
+    public static void main4(String[] args) {
+        MongoClient client = MongoClients.create("mongodb://vijay:vijay@db.bassure.guruofjava.com/vijay");
+        CodecRegistry codec = CodecRegistries.fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
+                CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+        MongoDatabase db = client.getDatabase("vijay");
+        MongoCollection<Users1> collection = db.getCollection("users1", Users1.class).withCodecRegistry(codec);
+        Consumer<Users1> userConsumer = e -> System.out.println(e);
+        collection.find(and(regex("email", "S.a"), lt("id", 10))).forEach(userConsumer);
+        client.close();
+    }
+
+    public static void main2(String[] args) {
         MongoClient client = MongoClients.create("mongodb://vijay:vijay@db.bassure.guruofjava.com/vijay");
         CodecRegistry codec = CodecRegistries.fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
                 CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build()));
@@ -32,14 +57,18 @@ public class MongoApp {
         collection.find().forEach(userConsumer);
         client.close();
         // MongoCollection<Document> collection=db.getCollection("users");
-        client.close();
     }
 
-    public static void main2(String[] args) {
+    public static void main3(String[] args) {
 
-//        MongoClient client=MongoClients.create("mongodb://vijay:vijay@db.bassure,guruofjava.com/vijay");
-//        CodecRegistry codec=CodecRegistries.fromRegistries(MongoClientSettings.getDefault);
-//        
+        MongoClient client = MongoClients.create("mongodb://vijay:vijay@db.bassure.guruofjava.com/vijay");
+        CodecRegistry codec = CodecRegistries.fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
+                CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+        MongoDatabase db = client.getDatabase("vijay");
+        MongoCollection<Users1> collection = db.getCollection("users1", Users1.class).withCodecRegistry(codec);
+        Users1 temp = new Users1(0, "Mongo", "mongouser", "mongo@mail.com");
+        collection.insertOne(temp);
+        client.close();
     }
 
     public static void main1(String[] args) {
@@ -48,6 +77,7 @@ public class MongoApp {
 
         Consumer<String> c = e -> System.out.println(e);
         db.listCollectionNames().forEach(c);
+        System.out.println("########################");
 
         MongoCollection<Document> collection = db.getCollection("users1");
 
