@@ -5,7 +5,6 @@
  */
 package com.digitallschool.training.spiders.springrest;
 
-import java.util.Date;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 
 /**
@@ -36,26 +35,6 @@ public class Candidate {
     public Candidate() {
     }
 
-    public Candidate(int id, String firstName, String lastName, Long phoneNumber, Long alternateNumber, String emailId, Double tex, Double rex, String primarySkills, String secondarySkills, String qualification, String additionalEducation, double expectedCtc, double currentCtc, String positionApplied, String gender, String dob, String address) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.alternateNumber = alternateNumber;
-        this.emailId = emailId;
-        this.tex = tex;
-        this.rex = rex;
-        this.primarySkills = primarySkills;
-        this.secondarySkills = secondarySkills;
-        this.qualification = qualification;
-        this.additionalEducation = additionalEducation;
-        this.expectedCtc = expectedCtc;
-        this.currentCtc = currentCtc;
-        this.positionApplied = positionApplied;
-        this.gender = gender;
-        this.dob = dob;
-        this.address = address;
-    }
 
     public int getId() {
         return id;
