@@ -5,6 +5,11 @@
  */
 package com.digitallschool.training.spiders.springrest;
 
+import java.math.BigInteger;
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -15,22 +20,35 @@ import org.bson.codecs.pojo.annotations.BsonProperty;
  * @author stphnvijay07
  */
 public class Candidate {
+
     @BsonProperty("id")
-    @NotEmpty
-    @Pattern(regexp = "^[0-9]{12,12}$")
-    private int id;
-    @NotEmpty
-    @Size(min = 4,max = 20)
-    @Pattern(regexp = "^[a-zA-Z]+$")
+    //@NotEmpty
+    //@Pattern(regexp = "^[0-9]{12,12}$" ,message = "Invalid Adhaar")
+
+    private long id;
+
+    @Pattern(regexp = "^[0-9]{12,12}$", message = "Invalid Adhaar")
+    private String adhaarId;
+    // @Pattern(regexp = "^[a-zA-Z]+$")
+
+    //@Size(min = 4,max = 20)
+    @Pattern(regexp = "^[a-zA-Z]{1,20}$", message = "Invalid first name")
     private String firstName;
+    @Pattern(regexp = "^[a-zA-Z]{1,20}$", message = "Invalid last name")
     private String lastName;
-    private Long phoneNumber;
-    private Long alternateNumber;
+    @Pattern(regexp = "^[0-9]{10,10}$", message = "Invalid phone number")
+    private String phoneNumber;
+    @Pattern(regexp = "^[0-9]{10,10}$", message = "Invalid alternate phone number")
+    private String alternateNumber;
+    @Email(message = "Invalid email format")
     private String emailId;
+    @Min(value = 1, message = "minimum exp must be one")
     private Double tex;
+    @Min(value = 3)
     private Double rex;
     private String primarySkills;
     private String secondarySkills;
+    //@Pattern(regexp = "^[]")
     private String qualification;
     private String additionalEducation;
     private double expectedCtc;
@@ -43,13 +61,20 @@ public class Candidate {
     public Candidate() {
     }
 
-
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
+    }
+
+    public String getAdhaarId() {
+        return adhaarId;
+    }
+
+    public void setAdhaarId(String adhaarId) {
+        this.adhaarId = adhaarId;
     }
 
     public String getFirstName() {
@@ -68,19 +93,19 @@ public class Candidate {
         this.lastName = lastName;
     }
 
-    public Long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Long phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public Long getAlternateNumber() {
+    public String getAlternateNumber() {
         return alternateNumber;
     }
 
-    public void setAlternateNumber(Long alternateNumber) {
+    public void setAlternateNumber(String alternateNumber) {
         this.alternateNumber = alternateNumber;
     }
 
@@ -190,7 +215,7 @@ public class Candidate {
 
     @Override
     public String toString() {
-        return "Candidate{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", alternateNumber=" + alternateNumber + ", emailId=" + emailId + ", tex=" + tex + ", rex=" + rex + ", primarySkills=" + primarySkills + ", secondarySkills=" + secondarySkills + ", qualification=" + qualification + ", additionalEducation=" + additionalEducation + ", expectedCtc=" + expectedCtc + ", currentCtc=" + currentCtc + ", positionApplied=" + positionApplied + ", gender=" + gender + ", dob=" + dob + ", address=" + address + '}';
+        return "Candidate{" + "id=" + id + ", adhaarId=" + adhaarId + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", alternateNumber=" + alternateNumber + ", emailId=" + emailId + ", tex=" + tex + ", rex=" + rex + ", primarySkills=" + primarySkills + ", secondarySkills=" + secondarySkills + ", qualification=" + qualification + ", additionalEducation=" + additionalEducation + ", expectedCtc=" + expectedCtc + ", currentCtc=" + currentCtc + ", positionApplied=" + positionApplied + ", gender=" + gender + ", dob=" + dob + ", address=" + address + '}';
     }
 
 }

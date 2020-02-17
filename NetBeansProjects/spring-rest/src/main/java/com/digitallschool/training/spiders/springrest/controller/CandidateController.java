@@ -8,7 +8,12 @@ package com.digitallschool.training.spiders.springrest.controller;
 import com.digitallschool.training.spiders.springrest.Candidate;
 import com.digitallschool.training.spiders.springrest.service.CandidateService;
 import java.util.List;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -36,8 +41,11 @@ public class CandidateController {
     }
 
     @PostMapping
-    public void addCandidate(@RequestBody Candidate candidate) {
-        ser.addCandidate(candidate);
+    public ResponseEntity<String> addCandidate(@Valid @RequestBody Candidate candidate,BindingResult rs) {
+       if(!rs.hasErrors()&&ser.addCandidate(candidate))
+        return ResponseEntity.ok("Successfully updated");
+       else
+           return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body("Invalid data" +rs.toString());
     }
 
     @DeleteMapping

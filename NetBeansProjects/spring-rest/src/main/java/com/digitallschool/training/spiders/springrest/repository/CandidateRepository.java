@@ -43,18 +43,19 @@ public class CandidateRepository {
 
     }
 
-    public void addCandidate(Candidate candidate) {
+    public boolean addCandidate(Candidate candidate) {
         System.out.println(candidate.getId());
         try {
 
             MongoCollection collection = mf.getDb("vijay").getCollection("candidate", Candidate.class).withCodecRegistry(CodecRegistries.fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
                     CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build())));
             collection.insertOne(candidate);
+            return true;
             //  collection.createIndex({"id":candidate.getId()},{unique:true});
         } catch (Exception eo) {
             eo.printStackTrace();
         }
-
+        return false;
     }
 
     public void deleteCandidate(int id) {

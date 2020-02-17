@@ -25,8 +25,8 @@ public class CandidateService {
         return rep.getAllCandidates();
     }
 
-    public void addCandidate(Candidate candidate) {
-        rep.addCandidate(candidate);
+    public boolean addCandidate(Candidate candidate) {
+        return rep.addCandidate(candidate);
     }
 
     public void deleteCandidate(int id) {
