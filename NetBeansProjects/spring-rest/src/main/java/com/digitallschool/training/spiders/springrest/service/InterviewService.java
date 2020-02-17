@@ -7,6 +7,7 @@ package com.digitallschool.training.spiders.springrest.service;
 
 import com.digitallschool.training.spiders.springrest.Interview;
 import com.digitallschool.training.spiders.springrest.repository.InterviewRepository;
+import java.sql.SQLException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,13 +18,26 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class InterviewService {
-    
+
     @Autowired
     InterviewRepository rep;
-            
+
     public List<Interview> getAllInterview() {
-        
-      return rep.getAllInterview();
+
+        return rep.getAllInterview();
+    }
+
+    public void addInterview(Interview interview) throws SQLException {
+
+        rep.addInterview(interview);
+    }
+
+    public void deleteInterview(int id) throws SQLException {
+        rep.deleteInterview(id);
+    }
+
+    public void updateInterview(Interview interview, int id) {
+        rep.updateInterview(interview,id);
     }
 
 }

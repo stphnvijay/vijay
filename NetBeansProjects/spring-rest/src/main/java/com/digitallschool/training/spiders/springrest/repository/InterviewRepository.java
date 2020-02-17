@@ -31,7 +31,7 @@ public class InterviewRepository {
         List<Interview> interview = new ArrayList<>();
         try (ResultSet rs = ds.getConnection().createStatement().executeQuery("SELECT * FROM interview")) {
             while (rs.next()) {
-                interview.add(new Interview(rs.getInt(1), rs.getString(2), rs.getDate(3), rs.getString(4),
+                interview.add(new Interview(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
                         rs.getString(5), rs.getString(6), rs.getString(7)));
             }
             return interview;
@@ -45,16 +45,45 @@ public class InterviewRepository {
 
         try (PreparedStatement ps = ds.getConnection().prepareStatement("INSERT INTO interview VALUES( ?,  ?,  ?,  ?,  ?,  ?,  ?)"
         )) {
-            ps.setInt(1,interview.getCandidate_id());
+            ps.setInt(1, interview.getCandidate_id());
             ps.setString(2, interview.getModeOfInterview());
-            ps.setDate(3, (Date) interview.getDob());
+            ps.setString(3, interview.getDob());
             ps.setString(4, interview.getLocation());
             ps.setString(5, interview.getRecommondation());
             ps.setString(6, interview.getInterviewPanel());
             ps.setString(7, interview.getReference());
-            
+
             ps.executeUpdate();
         } catch (Exception eo) {
+            eo.printStackTrace();
+        }
+    }
+
+    public void deleteInterview(int id) throws SQLException {
+        try (PreparedStatement ps = ds.getConnection().prepareStatement("DELETE FROM interview where customer_id=?")) {
+
+            ps.setInt(1, id);
+            ps.executeUpdate();
+
+        } catch (Exception eo) {
+            eo.printStackTrace();
+        }
+
+    }
+
+    public void updateInterview(Interview interview, int id) {
+    
+        try(PreparedStatement ps=ds.getConnection().prepareStatement("UPDATE interview SET modeOfInterview=?,dob=?, location=?,recommendation=?,interviewPanel=?,reference=? where customer_id=? ")){
+            ps.setInt(7, id);
+            ps.setString(1, interview.getModeOfInterview());
+            ps.setString(2, interview.getDob());
+            ps.setString(3, interview.getLocation());
+            ps.setString(4, interview.getRecommondation());
+            ps.setString(5, interview.getInterviewPanel());
+            ps.setString(6, interview.getReference());
+            ps.executeUpdate();
+            
+        }catch(Exception eo){
             eo.printStackTrace();
         }
     }

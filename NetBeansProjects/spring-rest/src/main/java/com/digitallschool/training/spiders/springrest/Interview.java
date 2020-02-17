@@ -15,7 +15,7 @@ import java.util.Date;
 public class Interview {
     private int candidate_id;
     private String modeOfInterview;
-    private Date dob;
+    private String dob;
     private String location;
     private String recommondation;
     private String interviewPanel;
@@ -24,7 +24,7 @@ public class Interview {
     public Interview() {
     }
 
-    public Interview(int candidate_id, String modeOfInterview, Date dob, String location, String recommondation, String interviewPanel, String reference) {
+    public Interview(int candidate_id, String modeOfInterview, String dob, String location, String recommondation, String interviewPanel, String reference) {
         this.candidate_id = candidate_id;
         this.modeOfInterview = modeOfInterview;
         this.dob = dob;
@@ -51,11 +51,11 @@ public class Interview {
         this.modeOfInterview = modeOfInterview;
     }
 
-    public Date getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 

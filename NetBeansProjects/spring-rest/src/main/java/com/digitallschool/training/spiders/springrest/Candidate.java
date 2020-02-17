@@ -5,6 +5,9 @@
  */
 package com.digitallschool.training.spiders.springrest;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 
 /**
@@ -13,7 +16,12 @@ import org.bson.codecs.pojo.annotations.BsonProperty;
  */
 public class Candidate {
     @BsonProperty("id")
+    @NotEmpty
+    @Pattern(regexp = "^[0-9]{12,12}$")
     private int id;
+    @NotEmpty
+    @Size(min = 4,max = 20)
+    @Pattern(regexp = "^[a-zA-Z]+$")
     private String firstName;
     private String lastName;
     private Long phoneNumber;
