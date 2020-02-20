@@ -10,11 +10,14 @@ import com.digitallschool.training.spiders.springrest.service.InterviewService;
 import java.sql.SQLException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author stphnvijay07
  */
 @RestController
+@CrossOrigin
 @RequestMapping("interview")
 public class InterviewController {
 
@@ -36,8 +40,8 @@ public class InterviewController {
 
     }
     
-    @PostMapping
-    public void addInterview(Interview interview) throws SQLException{
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void addInterview(@RequestBody Interview interview) throws SQLException{
         ser.addInterview(interview);
     }
     

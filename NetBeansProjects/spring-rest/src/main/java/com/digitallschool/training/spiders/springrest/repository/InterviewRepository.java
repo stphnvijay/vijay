@@ -52,7 +52,6 @@ public class InterviewRepository {
             ps.setString(5, interview.getRecommondation());
             ps.setString(6, interview.getInterviewPanel());
             ps.setString(7, interview.getReference());
-
             ps.executeUpdate();
         } catch (Exception eo) {
             eo.printStackTrace();

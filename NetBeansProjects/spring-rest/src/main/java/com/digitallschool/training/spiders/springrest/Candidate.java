@@ -36,10 +36,10 @@ public class Candidate {
     private String firstName;
     @Pattern(regexp = "^[a-zA-Z]{1,20}$", message = "Invalid last name")
     private String lastName;
-    @Pattern(regexp = "^[0-9]{10,10}$", message = "Invalid phone number")
-    private String phoneNumber;
-    @Pattern(regexp = "^[0-9]{10,10}$", message = "Invalid alternate phone number")
-    private String alternateNumber;
+   // @Pattern(regexp = "^[0-9]{10,10}$", message = "Invalid phone number")
+    private long phoneNumber;
+   // @Pattern(regexp = "^[0-9]{10,10}$", message = "Invalid alternate phone number")
+    private long alternateNumber;
     @Email(message = "Invalid email format")
     private String emailId;
     @Min(value = 1, message = "minimum exp must be one")
@@ -93,19 +93,19 @@ public class Candidate {
         this.lastName = lastName;
     }
 
-    public String getPhoneNumber() {
+    public long getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getAlternateNumber() {
+    public long getAlternateNumber() {
         return alternateNumber;
     }
 
-    public void setAlternateNumber(String alternateNumber) {
+    public void setAlternateNumber(long alternateNumber) {
         this.alternateNumber = alternateNumber;
     }
 
