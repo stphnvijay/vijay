@@ -13,6 +13,7 @@ import Home from "./Home";
 import Sample from "./Sample";
 import UpdateCand from "./UpdateCand";
 import GetInt from "./GetInt";
+import UpdateInt from "./UpdateInt";
 
 class App extends React.Component {
   constructor() {
@@ -47,8 +48,9 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/GetCand" component={GetCand} />
-            <Route path="/PutCand" component={PutInter} />
-            <Route path="/UpdateCand" component={UpdateCand}/>
+            <Route path="/PutCand" component={GetInt} />
+            <Route path="/UpdateCand/:val" component={UpdateCand}/>
+            <Route path="/UpdateInt/:val" component={UpdateInt}/>
           </Switch>
         </div>
       </Router>

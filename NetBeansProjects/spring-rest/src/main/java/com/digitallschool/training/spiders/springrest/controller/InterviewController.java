@@ -10,11 +10,14 @@ import com.digitallschool.training.spiders.springrest.service.InterviewService;
 import java.sql.SQLException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,20 +42,39 @@ public class InterviewController {
         return ser.getAllInterview();
 
     }
-    
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addInterview(@RequestBody Interview interview) throws SQLException{
-        ser.addInterview(interview);
+    @GetMapping("/{id}")
+    public Interview getInterviewById(@PathVariable("id") int id){
+        return ser.getInterviewById(id);
+        
     }
     
-    @DeleteMapping
-    public void deleteInterview(@RequestParam int id) throws SQLException{
+//    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+//    public void addInterview(@RequestBody Interview interview) throws SQLException{
+//        ser.addInterview(interview);
+//    }
+    
+     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> addInterview(@RequestBody Interview interview) throws SQLException{
+       if(ser.addInterview(interview)){
+           return ResponseEntity.ok("successfully added");
+       }
+       else{
+           return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body("invalid data");
+       }
+    }
+    
+    
+    
+    
+    @DeleteMapping("/{id}")
+    public void deleteInterview(@PathVariable("id") int id) throws SQLException{
         ser.deleteInterview(id);
         
     }
     
-    @PutMapping
-    public void updateInterview(@ModelAttribute("interview") Interview interview,@RequestParam int id){
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void updateInterview(@RequestBody Interview interview){
+        int id=interview.getCandidate_id();
         ser.updateInterview(interview,id);
         
     }

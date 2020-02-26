@@ -11,7 +11,8 @@ import {
   MDBIcon
 } from "mdbreact";
 
-class PutInter extends React.Component {
+
+class UpdateInt extends React.Component {
   localInterview = {
     candidate_id: "",
     modeOfInterview: "",
@@ -29,6 +30,14 @@ class PutInter extends React.Component {
     this.handleChange=this.handleChange.bind(this);
     this.handleSubmit=this.handleSubmit.bind(this)
   }
+  componentDidMount(){
+      Axios.get("http://localhost:8085/interview/"+this.props.match.params.val).then(response =>this.setState({
+          Interview:response.data
+      }))
+      console.log(this.state.Interview)
+  }
+
+
 
   handleChange = (e)=> {
     let name = e.target.name;
@@ -44,10 +53,10 @@ class PutInter extends React.Component {
       e.preventDefault();
    let interview=this.state.Interview
    console.log(interview)
-    Axios.post("http://localhost:8085/interview", interview).then((e) =>
+    Axios.put("http://localhost:8085/interview", interview).then((e) =>
       console.log(e)
     )
-  //  window.location.reload();
+    window.location.reload();
   };
 
   render() {
@@ -56,7 +65,7 @@ class PutInter extends React.Component {
         <MDBRow>
           <MDBCol md="6">
             <form onSubmit={this.handleSubmit}>
-              <p className="h4 text-center py-4">Add Interview</p>
+              <p className="h4 text-center py-4">Update Interview</p>
               <label
                 htmlFor="defaultFormCardNameEx"
                 className="grey-text font-weight-light"
@@ -69,6 +78,8 @@ class PutInter extends React.Component {
                 className="form-control"
                 name="candidate_id"
                 onChange={this.handleChange}
+                value={this.state.Interview.candidate_id}
+                disabled={true}
               />
               <br />
 
@@ -83,6 +94,7 @@ class PutInter extends React.Component {
                 id="defaultFormCardNameEx"
                 className="form-control"
                 name="modeOfInterview"
+                value={this.state.Interview.modeOfInterview}
                 onChange={this.handleChange}
               />
               <br />
@@ -99,6 +111,7 @@ class PutInter extends React.Component {
                 className="form-control"
                 name="dob"
                 onChange={this.handleChange}
+                value={this.state.Interview.dob}
               />
               <br />
 
@@ -114,6 +127,7 @@ class PutInter extends React.Component {
                 className="form-control"
                 name="location"
                 onChange={this.handleChange}
+                value={this.state.Interview.location}
               />
               <br />
 
@@ -129,6 +143,7 @@ class PutInter extends React.Component {
                 className="form-control"
                 name="recommondation"
                 onChange={this.handleChange}
+                value={this.state.Interview.recommondation}
               />
               <br />
 
@@ -144,6 +159,7 @@ class PutInter extends React.Component {
                 className="form-control"
                 name="interviewPanel"
                 onChange={this.handleChange}
+                value={this.state.Interview.interviewPanel}
               />
               <br />
 
@@ -159,6 +175,7 @@ class PutInter extends React.Component {
                 className="form-control"
                 name="reference"
                 onChange={this.handleChange}
+                value={this.state.Interview.reference}
               />
               <br />
               <div className="text-center py-4 mt-3">
@@ -174,4 +191,4 @@ class PutInter extends React.Component {
     );
   }
 }
-export default PutInter
+export default UpdateInt

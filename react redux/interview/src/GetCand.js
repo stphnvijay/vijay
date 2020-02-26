@@ -4,15 +4,19 @@ import Axios from "axios";
 import GetCandList from "./GetCandList";
 import PutCand from "./PutCand";
 import { Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.css";
+import swal from 'sweetalert';
 
 class GetCandit extends React.Component {
   constructor() {
     super();
     this.state = {
       project: [],
+      Filtered:[],
       isTrue: false,
       isCandidate: false,
-      keysList: []
+      keysList: [],
+      isDelete:false
       // value: []
     };
     Axios.get("http://localhost:8085/candidate").then(response =>
@@ -26,7 +30,8 @@ class GetCandit extends React.Component {
   funcKeys = () => {
     this.setState({
       keysList: Object.keys(this.state.project[1]),
-      isTrue: !this.state.isTrue
+      isTrue: !this.state.isTrue,
+      isCandidate:false
     });
   };
 
@@ -40,30 +45,95 @@ class GetCandit extends React.Component {
     return tds;
   };
 
-  renderRows = () => {
-    const trs = this.state.project.map(e => (
+  sweetAlertDelete=(e)=>{
+    console.log(e.target.value);
+    let targetValue=e.target.value;
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this imaginary file!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      e.preventDefault();
+      if (willDelete) {
+        //this.deleteRow(targetValue);
+        console.log(willDelete)
+       // this.deleteRow(targetValue);
+        swal("Poof! Your imaginary file has been deleted!", {
+          icon: "success",
+          
+        }).then((res)=> Axios.delete("http://localhost:8085/candidate/"+targetValue).then(
+          (res)=>console.log("deleted",res)));
+        
+        // this.setState({
+        //   isDelete:!this.state.isDelete
+        // })
+
+      } else {
+        swal("Your imaginary file is safe!");
+      }
+    })
+    
+    if(this.state.isDelete){
+     // this.deleteRow(targetValue);
+    }
+  }
+
+
+  renderRows = (e) => {
+
+    
+    const trs = this.state.Filtered.map(e => {
+     // let source="/UpdateCand/"+e.id;
+      return(
       <tr key={e.id}>{this.renderTds(e)}
-      <td><button value={e.id} name="id" onClick={this.deleteRow}>Delete</button></td>
-      <td><Link to={"/UpdateCand"}></Link><button >Update</button></td>
+      <td><button value={e.id} name="id" onClick={this.sweetAlertDelete}>Delete</button></td>
+      <td><Link to={"/UpdateCand/"+e.id} params={{data:e.id}}><button >Update</button></Link></td>
       </tr>
   
-    ));
+    )
+    }
+    );
 
     return trs;
   };
 
-  deleteRow=event =>{
-    const id=event.target.value;
+  changeHandler= (e)=>{
+    let filterResult=[];
+    let value1=e.target.value;
+    let dubProject=this.state.project;
+    
+  
+    if(value1!=''){
+    filterResult=dubProject.filter(pro=>{
+      let str=(pro.adhaarId).substring(0,value1.length);
+      return str.includes(value1);
+    })
+  }else{
+    filterResult=dubProject;
+  }
+  this.setState({
+    Filtered:filterResult
+  })
+
+
+  }
+
+  deleteRow=eve =>{
+    const id=eve;
     console.log(id);
     Axios.delete("http://localhost:8085/candidate/"+id).then(
-      (res)=>console.log("deleted",res)),
-      this.props.history.push("/");
+      (res)=>console.log("deleted",res));
+      window.location.reload();
 
   }
 
   addCand = () => {
     this.setState({
-      isCandidate: !this.state.isCandidate
+      isCandidate: !this.state.isCandidate,
+      isTrue:false
     });
   };
 
@@ -87,13 +157,20 @@ class GetCandit extends React.Component {
           </div>
         </div>
         {isTrue ? (
+          <div className="App">
           <div className="row">
-            <div className="col-lg-12">
+              <div className="col-lg-12">
+            <input type="text" className="input" onChange={this.changeHandler} placeholder="Search..." />
+            </div>
+            </div>
+          <div className="row">
+            <div className="col-lg-12 "  style={{marginTop:50}}>
               <table className="table table-hover table-striped" border="2px">
                 <GetCandList keydata={this.state.keysList} />
                 <tbody key="body">{this.renderRows()}</tbody>
               </table>
             </div>
+          </div>
           </div>
         ) : null}
         {isCandidate ? <PutCand /> : null}

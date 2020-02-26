@@ -5,7 +5,9 @@
  */
 package com.digitallschool.training.spiders.springrest.service;
 
+import com.digitallschool.training.spiders.springrest.Candidate;
 import com.digitallschool.training.spiders.springrest.Interview;
+import com.digitallschool.training.spiders.springrest.repository.CandidateRepository;
 import com.digitallschool.training.spiders.springrest.repository.InterviewRepository;
 import java.sql.SQLException;
 import java.util.List;
@@ -21,16 +23,30 @@ public class InterviewService {
 
     @Autowired
     InterviewRepository rep;
+    
+    @Autowired
+    CandidateRepository canRep;
 
     public List<Interview> getAllInterview() {
 
         return rep.getAllInterview();
     }
 
-    public void addInterview(Interview interview) throws SQLException {
-
+//    public void addInterview(Interview interview) throws SQLException {
+//
+//        rep.addInterview(interview);
+//    }
+    
+     public boolean addInterview(Interview interview) throws SQLException {
+         int id=interview.getCandidate_id();
+         Candidate candidate=canRep.getOneCandidate(id);
+         if(candidate!=null){
         rep.addInterview(interview);
-    }
+        return true;
+   }
+         return false;
+     }
+    
 
     public void deleteInterview(int id) throws SQLException {
         rep.deleteInterview(id);
@@ -38,6 +54,10 @@ public class InterviewService {
 
     public void updateInterview(Interview interview, int id) {
         rep.updateInterview(interview,id);
+    }
+
+    public Interview getInterviewById(int id) {
+     return rep.getInterviewById(id);  
     }
 
 }

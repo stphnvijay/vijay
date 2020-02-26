@@ -7,6 +7,7 @@ package com.digitallschool.training.spiders.springrest.repository;
 
 import com.digitallschool.training.spiders.springrest.Candidate;
 import com.mongodb.MongoClientSettings;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import static com.mongodb.client.model.Filters.eq;
 import java.util.ArrayList;
@@ -68,14 +69,34 @@ public class CandidateRepository {
         }
     }
 
-    public void updateCandidate(int id,Candidate candidate) {
+    public void updateCandidate(int id, Candidate candidate) {
         try {
             MongoCollection collection = mf.getDb("vijay").getCollection("candidate", Candidate.class).withCodecRegistry(CodecRegistries.fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
                     CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build())));
-            collection.replaceOne(eq("id",id),candidate);
+            collection.replaceOne(eq("id", id), candidate);
         } catch (Exception eo) {
             eo.printStackTrace();
         }
 
+    }
+
+    public Candidate getOneCandidate(int id) {
+
+        System.out.println(id);
+        try {
+            Candidate candidate = null;
+            MongoCollection collection = mf.getDb("vijay").getCollection("candidate", Candidate.class).withCodecRegistry(CodecRegistries.fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
+                    CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build())));
+
+            FindIterable<Candidate> it = collection.find(eq("id", id));
+            for (Candidate c : it) {
+                candidate = c;
+
+            }
+            return candidate;
+        } catch (Exception eo) {
+            eo.printStackTrace();
+        }
+        return new Candidate();
     }
 }

@@ -59,7 +59,7 @@ public class InterviewRepository {
     }
 
     public void deleteInterview(int id) throws SQLException {
-        try (PreparedStatement ps = ds.getConnection().prepareStatement("DELETE FROM interview where customer_id=?")) {
+        try (PreparedStatement ps = ds.getConnection().prepareStatement("DELETE FROM interview where candidate_id=?")) {
 
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -72,7 +72,7 @@ public class InterviewRepository {
 
     public void updateInterview(Interview interview, int id) {
     
-        try(PreparedStatement ps=ds.getConnection().prepareStatement("UPDATE interview SET modeOfInterview=?,dob=?, location=?,recommendation=?,interviewPanel=?,reference=? where customer_id=? ")){
+        try(PreparedStatement ps=ds.getConnection().prepareStatement("UPDATE interview SET modeOfInterview=?,dob=?, location=?,recommendation=?,interviewPanel=?,reference=? where candidate_id=? ")){
             ps.setInt(7, id);
             ps.setString(1, interview.getModeOfInterview());
             ps.setString(2, interview.getDob());
@@ -85,6 +85,20 @@ public class InterviewRepository {
         }catch(Exception eo){
             eo.printStackTrace();
         }
+    }
+
+    public Interview getInterviewById(int id) {
+    
+        Interview interview=null;
+        try(ResultSet rs=ds.getConnection().createStatement().executeQuery("SELECT * FROM interview WHERE candidate_id="+id)){
+            while(rs.next()){
+                interview = new Interview(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
+            }
+            return interview;
+        }catch(Exception eo){
+            eo.printStackTrace();
+        }
+        return null;
     }
 
 }

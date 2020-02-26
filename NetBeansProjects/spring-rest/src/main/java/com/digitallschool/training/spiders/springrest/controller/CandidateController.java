@@ -43,6 +43,13 @@ public class CandidateController {
     public List<Candidate> getCandidates() {
         return ser.getAllCandidates();
     }
+    
+    @GetMapping("/{id}")
+    public Candidate getOneCandidate(@PathVariable("id") int id){
+        return ser.getOneCandidate(id);
+        
+    }
+    
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> addCandidate(@Valid @RequestBody Candidate candidate,BindingResult rs) {

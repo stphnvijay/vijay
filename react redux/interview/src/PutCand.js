@@ -67,6 +67,7 @@ class PutCand extends React.Component {
     Axios.post("http://localhost:8085/candidate", candidate).then(e =>
       console.log("posted")
     );
+    window.location.reload();
     //console.log(this.state);
   };
 
@@ -161,44 +162,55 @@ class PutCand extends React.Component {
                 onChange={this.handleChange}
               />
               <br />
+              
               <label
                 htmlFor="defaultFormCardEmailEx"
                 className="grey-text font-weight-light"
               >
-                Your email:
+                EmailId:
               </label>
               <input
-                type="email"
+                type="text"
                 id="defaultFormCardEmailEx"
                 className="form-control"
                 name="emailId"
+                onChange={this.handleChange}
               />
+              <br />
+
+
               <label
-                htmlFor="defaultFormCardNameEx"
+                htmlFor="defaultFormCardNumberEx"
                 className="grey-text font-weight-light"
               >
                 Total Experience:
               </label>
               <input
-                type="text"
-                id="defaultFormCardNameEx"
+                type="number"
+                id="defaultFormCardNumberEx"
                 className="form-control"
                 name="tex"
+                onChange={this.handleChange}
               />
               <br />
+
               <label
-                htmlFor="defaultFormCardNameEx"
+                htmlFor="defaultFormCardNumberEx"
                 className="grey-text font-weight-light"
               >
                 Relavent Experience:
               </label>
               <input
-                type="text"
-                id="defaultFormCardNameEx"
+                type="number"
+                id="defaultFormCardNumberEx"
                 className="form-control"
                 name="rex"
+                onChange={this.handleChange}
               />
               <br />
+
+
+             
               <label
                 htmlFor="defaultFormCardNameEx"
                 className="grey-text font-weight-light"
@@ -210,21 +222,27 @@ class PutCand extends React.Component {
                 id="defaultFormCardNameEx"
                 className="form-control"
                 name="primarySkills"
+                onChange={this.handleChange}
               />
               <br />
+
               <label
                 htmlFor="defaultFormCardNameEx"
                 className="grey-text font-weight-light"
               >
-                Secondary Skills:
+                Secondary skills:
               </label>
               <input
                 type="text"
                 id="defaultFormCardNameEx"
                 className="form-control"
                 name="secondarySkills"
+                onChange={this.handleChange}
               />
               <br />
+
+
+
               <label
                 htmlFor="defaultFormCardNameEx"
                 className="grey-text font-weight-light"
@@ -236,8 +254,14 @@ class PutCand extends React.Component {
                 id="defaultFormCardNameEx"
                 className="form-control"
                 name="qualification"
+                onChange={this.handleChange}
               />
               <br />
+
+
+
+
+
               <label
                 htmlFor="defaultFormCardNameEx"
                 className="grey-text font-weight-light"
@@ -249,8 +273,12 @@ class PutCand extends React.Component {
                 id="defaultFormCardNameEx"
                 className="form-control"
                 name="additionalEducation"
+                onChange={this.handleChange}
               />
               <br />
+
+
+
               <label
                 htmlFor="defaultFormCardNameEx"
                 className="grey-text font-weight-light"
@@ -258,12 +286,14 @@ class PutCand extends React.Component {
                 Expected Ctc:
               </label>
               <input
-                type="text"
+                type="number"
                 id="defaultFormCardNameEx"
                 className="form-control"
                 name="expectedCtc"
+                onChange={this.handleChange}
               />
               <br />
+
               <label
                 htmlFor="defaultFormCardNameEx"
                 className="grey-text font-weight-light"
@@ -271,25 +301,30 @@ class PutCand extends React.Component {
                 Current Ctc:
               </label>
               <input
-                type="text"
+                type="number"
                 id="defaultFormCardNameEx"
                 className="form-control"
                 name="currentCtc"
+                onChange={this.handleChange}
               />
               <br />
               <label
                 htmlFor="defaultFormCardNameEx"
                 className="grey-text font-weight-light"
               >
-                PositionApplied:
+                Position Applied:
               </label>
               <input
                 type="text"
                 id="defaultFormCardNameEx"
                 className="form-control"
                 name="positionApplied"
+                onChange={this.handleChange}
               />
               <br />
+
+
+
               <label>
                 Gender: Male{" "}
                 <input
@@ -306,7 +341,9 @@ class PutCand extends React.Component {
                 value="Female"
                 onChange={this.handleChange}
               />
-              <label
+              <br/>
+
+             <label
                 htmlFor="defaultFormCardNameEx"
                 className="grey-text font-weight-light"
               >
@@ -317,8 +354,11 @@ class PutCand extends React.Component {
                 id="defaultFormCardNameEx"
                 className="form-control"
                 name="dob"
+                onChange={this.handleChange}
               />
               <br />
+
+              
               <label
                 htmlFor="defaultFormCardNameEx"
                 className="grey-text font-weight-light"
@@ -330,8 +370,11 @@ class PutCand extends React.Component {
                 id="defaultFormCardNameEx"
                 className="form-control"
                 name="address"
+                onChange={this.handleChange}
               />
               <br />
+
+              
               <div className="text-center py-4 mt-3">
                 <MDBBtn className="btn btn-outline-purple" type="submit">
                   Send

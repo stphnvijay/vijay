@@ -27,24 +27,24 @@ public class Candidate {
 
     private long id;
 
-    @Pattern(regexp = "^[0-9]{12,12}$", message = "Invalid Adhaar")
+    //@Pattern(regexp = "^[0-9]{12,12}$", message = "Invalid Adhaar")
     private String adhaarId;
     // @Pattern(regexp = "^[a-zA-Z]+$")
 
     //@Size(min = 4,max = 20)
-    @Pattern(regexp = "^[a-zA-Z]{1,20}$", message = "Invalid first name")
+   // @Pattern(regexp = "^[a-zA-Z]{1,20}$", message = "Invalid first name")
     private String firstName;
-    @Pattern(regexp = "^[a-zA-Z]{1,20}$", message = "Invalid last name")
+    //@Pattern(regexp = "^[a-zA-Z]{1,20}$", message = "Invalid last name")
     private String lastName;
    // @Pattern(regexp = "^[0-9]{10,10}$", message = "Invalid phone number")
     private long phoneNumber;
    // @Pattern(regexp = "^[0-9]{10,10}$", message = "Invalid alternate phone number")
     private long alternateNumber;
-    @Email(message = "Invalid email format")
+    //@Email(message = "Invalid email format")
     private String emailId;
-    @Min(value = 1, message = "minimum exp must be one")
+    //@Min(value = 1, message = "minimum exp must be one")
     private Double tex;
-    @Min(value = 3)
+    //@Min(value = 3)
     private Double rex;
     private String primarySkills;
     private String secondarySkills;
