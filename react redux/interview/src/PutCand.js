@@ -57,6 +57,17 @@ class PutCand extends React.Component {
     this.setState({ candidate });
   };
 
+  changecheck(e){
+    var a =e.target.value
+  
+  if (a.match(/[0-9]/)){
+  // e.preventDefault();
+  console.log("matched")
+}else{
+  console.log("invalid input");
+}
+  }
+  
   handleSubmit = e => {
     e.preventDefault();
 
@@ -64,10 +75,12 @@ class PutCand extends React.Component {
 
     console.log(candidate);
 
-    Axios.post("http://localhost:8085/candidate", candidate).then(e =>
+    Axios.post("http://localhost:8085/candidate", candidate).then(e =>{
       console.log("posted")
+      window.location.reload();
+  }
     );
-    window.location.reload();
+   // window.location.reload();
     //console.log(this.state);
   };
 
@@ -89,6 +102,7 @@ class PutCand extends React.Component {
                 id="defaultFormCardNameEx"
                 className="form-control"
                 name="id"
+                pattern="[0-9]{,3}"
                 onChange={this.handleChange}
               />
               <br />
@@ -103,7 +117,10 @@ class PutCand extends React.Component {
                 id="defaultFormCardNameEx"
                 className="form-control"
                 name="adhaarId"
+                pattern="[0-9]{12}"
+                onKeyDown={this.changecheck}
                 onChange={this.handleChange}
+                // required
               />
               <br />
               <label
@@ -170,11 +187,13 @@ class PutCand extends React.Component {
                 EmailId:
               </label>
               <input
-                type="text"
+                type="email"
                 id="defaultFormCardEmailEx"
                 className="form-control"
                 name="emailId"
+                placeholder="Email"
                 onChange={this.handleChange}
+                required
               />
               <br />
 
@@ -350,7 +369,7 @@ class PutCand extends React.Component {
                 Dob:
               </label>
               <input
-                type="text"
+                type="Date"
                 id="defaultFormCardNameEx"
                 className="form-control"
                 name="dob"

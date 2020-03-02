@@ -93,6 +93,7 @@ public class CandidateRepository {
                 candidate = c;
 
             }
+            System.out.println(candidate);
             return candidate;
         } catch (Exception eo) {
             eo.printStackTrace();

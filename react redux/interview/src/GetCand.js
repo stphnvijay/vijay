@@ -6,8 +6,30 @@ import PutCand from "./PutCand";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import swal from 'sweetalert';
+import candidateimg from './candidateimg.jpg';
 
 class GetCandit extends React.Component {
+  localeCandit={
+    id: "",
+    adhaarId: "",
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    alternateNumber: "",
+    emailId: "",
+    tex: "",
+    rex: "",
+    primarySkills: "",
+    secondarySkills: "",
+    qualification: "",
+    additionalEducation: "",
+    expectedCtc: "",
+    currentCtc: "",
+    positionApplied: "",
+    gender: "",
+    dob: "",
+    address: ""
+  };
   constructor() {
     super();
     this.state = {
@@ -28,11 +50,23 @@ class GetCandit extends React.Component {
   }
 
   funcKeys = () => {
+    if((this.state.project[0])!==null){
+      console.log(true);
     this.setState({
-      keysList: Object.keys(this.state.project[1]),
+      keysList: Object.keys(this.state.project[0]),
       isTrue: !this.state.isTrue,
-      isCandidate:false
-    });
+      isCandidate:false,
+      Filtered:this.state.project
+    });}
+    else{
+      console.log("false")
+      this.setState({
+        keysList: Object.keys(this.localeCandit),
+        isTrue: !this.state.isTrue,
+        isCandidate:false,
+        Filtered:this.state.project
+      });
+    }
   };
 
   renderTds = project1 => {
@@ -50,22 +84,31 @@ class GetCandit extends React.Component {
     let targetValue=e.target.value;
     swal({
       title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this imaginary file!",
+      text: "Once deleted, you will not be able to recover this Candidate data!",
       icon: "warning",
       buttons: true,
       dangerMode: true,
     })
     .then((willDelete) => {
-      e.preventDefault();
+      //e.preventDefault();
       if (willDelete) {
         //this.deleteRow(targetValue);
         console.log(willDelete)
+        Axios.delete("http://localhost:8085/candidate/"+targetValue).then(
+          (res)=>{console.log("deleted",res)
+         })
        // this.deleteRow(targetValue);
-        swal("Poof! Your imaginary file has been deleted!", {
+        swal("Poof! Your Candidate data has been deleted!", {
           icon: "success",
           
-        }).then((res)=> Axios.delete("http://localhost:8085/candidate/"+targetValue).then(
-          (res)=>console.log("deleted",res)));
+        }).then(  Axios.delete("http://localhost:8085/candidate/"+targetValue).then(
+          (res)=>{console.log("deleted",res)
+         }));
+          swal("Seccuessfully deleted");
+        //  window.location.reload()
+        // Axios.delete("http://localhost:8085/candidate/"+targetValue).then(
+        //   (res)=>{console.log("deleted",res)
+        //  });
         
         // this.setState({
         //   isDelete:!this.state.isDelete
@@ -76,11 +119,11 @@ class GetCandit extends React.Component {
       }
     })
     
-    if(this.state.isDelete){
-     // this.deleteRow(targetValue);
-    }
+  //   if(this.state.isDelete){
+  //    // this.deleteRow(targetValue);
+  //   }
+  // }
   }
-
 
   renderRows = (e) => {
 
@@ -142,8 +185,10 @@ class GetCandit extends React.Component {
     //let keys1=Object.keys(this.state.project[1])
     // let value=this.state.project
     return (
+      
       <div className="App">
-        <h1>Candidates</h1>
+        {/* <img src="candidateimg"/> */}
+         <h1>Candidates</h1>
         <div className="row">
           <div className="col-lg-6">
             <button className="button" onClick={this.funcKeys}>
@@ -178,4 +223,5 @@ class GetCandit extends React.Component {
     );
   }
 }
+
 export default GetCandit;

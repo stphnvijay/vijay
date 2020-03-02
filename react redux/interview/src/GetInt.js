@@ -40,7 +40,8 @@ class GetInt extends React.Component {
     console.log(this.state.project)
     this.setState({
       isTrue:!this.state.isTrue,
-      keysList:Object.keys(this.state.project[1])
+      keysList:Object.keys(this.state.project[0]),
+      isInterview:false
     })
     console.log(this.state.project)
   }
@@ -81,7 +82,8 @@ class GetInt extends React.Component {
 addInterview=()=>{
 
 this.setState({
-  isInterview:!this.state.isInterview
+  isInterview:!this.state.isInterview,
+  isTrue:false
 })
 
 

@@ -7,6 +7,7 @@ package com.digitallschool.training.spiders.springrest.controller;
 
 import com.digitallschool.training.spiders.springrest.Candidate;
 import com.digitallschool.training.spiders.springrest.service.CandidateService;
+import java.sql.SQLException;
 import java.util.List;
 import javax.validation.Valid;
 
@@ -61,7 +62,7 @@ public class CandidateController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCandidate(@PathVariable("id") int id) {
+    public void deleteCandidate(@PathVariable("id") int id) throws SQLException {
         ser.deleteCandidate(id);
     }
     

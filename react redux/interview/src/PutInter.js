@@ -45,7 +45,7 @@ class PutInter extends React.Component {
    let interview=this.state.Interview
    console.log(interview)
     Axios.post("http://localhost:8085/interview", interview).then((e) =>
-      console.log(e)
+      console.log("posted")
     )
   //  window.location.reload();
   };
@@ -91,10 +91,10 @@ class PutInter extends React.Component {
                 htmlFor="defaultFormCardNameEx"
                 className="grey-text font-weight-light"
               >
-                Dob:
+                Date:
               </label>
               <input
-                type="text"
+                type="Date"
                 id="defaultFormCardNameEx"
                 className="form-control"
                 name="dob"
@@ -109,7 +109,7 @@ class PutInter extends React.Component {
                 Location:
               </label>
               <input
-                type="text"
+                type="Location"
                 id="defaultFormCardNameEx"
                 className="form-control"
                 name="location"
@@ -151,7 +151,7 @@ class PutInter extends React.Component {
                 htmlFor="defaultFormCardNameEx"
                 className="grey-text font-weight-light"
               >
-                Reference:
+                Status:
               </label>
               <input
                 type="text"
