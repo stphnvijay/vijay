@@ -8,7 +8,12 @@ package com.digitallschool.training.spiders.springrest.controller;
 import com.digitallschool.training.spiders.springrest.Candidate;
 import com.digitallschool.training.spiders.springrest.service.CandidateService;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,17 +41,36 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RequestMapping("/candidate")
 public class CandidateController {
-
+    
+    private static Logger logger=Logger.getLogger(CandidateController.class.getName());
+    Logger logger1=Logger.getLogger("vijay");
     @Autowired
     CandidateService ser;
 
     @GetMapping
     public List<Candidate> getCandidates() {
+      // logger.entering(getClass().getName(),"getCandidates");
+       // List<Candidate> arr=ser.getAllCandidates();
+       // System.out.println(arr);
+        //System.out.println("start");
+        //logger.exiting(getClass().getName(),"getCandidates");
+//        System.out.println(logger1.getName());
+//        System.out.println(logger.getName());
+//        System.out.println(logger);
+           logger.log(Level.SEVERE,"my log {0},{1},{2}",new Object[]{"log","severe","worst"});
+          logger.addHandler(new ConsoleHandler());
+           //logger.log(Level.SEVERE,"hello runtime",new RuntimeException("error"));
+                   
         return ser.getAllCandidates();
     }
     
     @GetMapping("/{id}")
-    public Candidate getOneCandidate(@PathVariable("id") int id){
+    public Candidate getOneCandidate(@PathVariable("id") int id) throws NoSuchMethodException{
+        System.out.println("start");
+        logger.addHandler(new ConsoleHandler());
+        logger.setLevel(Level.FINER);
+       logger.entering(CandidateController.class.getName(),"CandidateController");
+       // logger.log(Level.SEVERE,"hello runtime",new RuntimeException("error"));
         return ser.getOneCandidate(id);
         
     }

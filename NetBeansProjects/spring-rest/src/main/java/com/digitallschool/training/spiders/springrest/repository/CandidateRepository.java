@@ -93,11 +93,16 @@ public class CandidateRepository {
                 candidate = c;
 
             }
-            System.out.println(candidate);
-            return candidate;
+            if(candidate==null){
+                return candidate;
+            }else{
+           // System.out.println(candidate);
+            return null;
+            }
+            
         } catch (Exception eo) {
             eo.printStackTrace();
         }
-        return new Candidate();
+        return null;
     }
 }

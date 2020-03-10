@@ -10,6 +10,7 @@ import {
   MDBIcon
 } from "mdbreact";
 import Axios from "axios";
+import swal from "sweetalert";
 
 class PutCand extends React.Component {
   localCandidate = {
@@ -70,8 +71,15 @@ class PutCand extends React.Component {
   
   handleSubmit = e => {
     e.preventDefault();
-
+   
     let candidate = this.state.candidate;
+    var nowDate=new Date();
+    var presentDate=new Date(candidate.dob);
+    var age=nowDate.getFullYear()-presentDate.getFullYear();
+    console.log(age)
+    if(age<18){
+      swal("Invalid Date the age should be minimum 18 years");
+    }else{
 
     console.log(candidate);
 
@@ -83,6 +91,7 @@ class PutCand extends React.Component {
    // window.location.reload();
     //console.log(this.state);
   };
+}
 
   render() {
     return (
@@ -102,8 +111,11 @@ class PutCand extends React.Component {
                 id="defaultFormCardNameEx"
                 className="form-control"
                 name="id"
-                pattern="[0-9]{,3}"
+                pattern="[0-9]{1,3}"
                 onChange={this.handleChange}
+                placeholder="Id"
+                title="Enter Max 3 digit number"
+                 required
               />
               <br />
               <label
@@ -120,7 +132,9 @@ class PutCand extends React.Component {
                 pattern="[0-9]{12}"
                 onKeyDown={this.changecheck}
                 onChange={this.handleChange}
-                // required
+                placeholder="Adhaar Id"
+                title="Enter 12 Digit Adhaar number"
+                 required
               />
               <br />
               <label
@@ -135,6 +149,10 @@ class PutCand extends React.Component {
                 className="form-control"
                 name="firstName"
                 onChange={this.handleChange}
+                placeholder="First name"
+                title="Enter First name"
+                pattern="[a-zA-Z]{1,15}"
+                required
               />
               <br />
               <label
@@ -149,6 +167,10 @@ class PutCand extends React.Component {
                 className="form-control"
                 name="lastName"
                 onChange={this.handleChange}
+                placeholder="Last name"
+                title="Enter Last name"
+                pattern="[a-zA-Z]{1,15}"
+                required
               />
               <br />
               <label
@@ -163,6 +185,8 @@ class PutCand extends React.Component {
                 className="form-control"
                 name="phoneNumber"
                 onChange={this.handleChange}
+                placeholder="Phone number"
+                pattern="[0-9]{10}"
               />
               <br />
               <label
@@ -177,6 +201,8 @@ class PutCand extends React.Component {
                 className="form-control"
                 name="alternateNumber"
                 onChange={this.handleChange}
+                placeholder="Alternate number"
+                pattern="[0-9]{10}"
               />
               <br />
               
@@ -210,6 +236,8 @@ class PutCand extends React.Component {
                 className="form-control"
                 name="tex"
                 onChange={this.handleChange}
+                placeholder="Total experience"
+                pattern="[0-9]{1,2}"
               />
               <br />
 
@@ -225,6 +253,8 @@ class PutCand extends React.Component {
                 className="form-control"
                 name="rex"
                 onChange={this.handleChange}
+                placeholder="Relavent experience"
+                pattern="[0-9]{1,2}"
               />
               <br />
 
@@ -242,6 +272,9 @@ class PutCand extends React.Component {
                 className="form-control"
                 name="primarySkills"
                 onChange={this.handleChange}
+                placeholder="Primary skills"
+                pattern="[a-zA-Z0-9]{1,20}"
+                required
               />
               <br />
 
@@ -257,6 +290,7 @@ class PutCand extends React.Component {
                 className="form-control"
                 name="secondarySkills"
                 onChange={this.handleChange}
+                placeholder="Secondary skills"
               />
               <br />
 
@@ -274,6 +308,7 @@ class PutCand extends React.Component {
                 className="form-control"
                 name="qualification"
                 onChange={this.handleChange}
+                placeholder="Qualification"
               />
               <br />
 
@@ -293,6 +328,7 @@ class PutCand extends React.Component {
                 className="form-control"
                 name="additionalEducation"
                 onChange={this.handleChange}
+                placeholder="Additional education"
               />
               <br />
 
@@ -310,6 +346,7 @@ class PutCand extends React.Component {
                 className="form-control"
                 name="expectedCtc"
                 onChange={this.handleChange}
+                placeholder="Expected ctc"
               />
               <br />
 
@@ -325,6 +362,7 @@ class PutCand extends React.Component {
                 className="form-control"
                 name="currentCtc"
                 onChange={this.handleChange}
+                placeholder="Current Ctc"
               />
               <br />
               <label
@@ -339,6 +377,9 @@ class PutCand extends React.Component {
                 className="form-control"
                 name="positionApplied"
                 onChange={this.handleChange}
+                pattern="^[a-zA-Z0-9_]+( [a-zA-Z0-9_]+)*$"
+                placeholder="Position applied"
+                required
               />
               <br />
 
@@ -351,6 +392,7 @@ class PutCand extends React.Component {
                   name="gender"
                   value="Male"
                   onChange={this.handleChange}
+                  placeholder="Male"
                 />
               </label>
               Female{" "}
@@ -359,6 +401,7 @@ class PutCand extends React.Component {
                 type="radio"
                 value="Female"
                 onChange={this.handleChange}
+                placeholder="Female"
               />
               <br/>
 
@@ -374,6 +417,8 @@ class PutCand extends React.Component {
                 className="form-control"
                 name="dob"
                 onChange={this.handleChange}
+                placeholder="DOB"
+                
               />
               <br />
 
@@ -390,13 +435,14 @@ class PutCand extends React.Component {
                 className="form-control"
                 name="address"
                 onChange={this.handleChange}
+                placeholder="Address"
               />
               <br />
 
               
               <div className="text-center py-4 mt-3">
                 <MDBBtn className="btn btn-outline-purple" type="submit">
-                  Send
+                  Submit
                   <MDBIcon far icon="paper-plane" className="ml-2" />
                 </MDBBtn>
               </div>

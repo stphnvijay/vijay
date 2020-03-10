@@ -27,7 +27,7 @@ public class Candidate {
 
     private long id;
 
-    //@Pattern(regexp = "^[0-9]{12,12}$", message = "Invalid Adhaar")
+    @Pattern(regexp = "^[0-9]{12}$", message = "Invalid Adhaar")
     private String adhaarId;
     // @Pattern(regexp = "^[a-zA-Z]+$")
 

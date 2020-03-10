@@ -1,0 +1,11 @@
+## YAML Template.
+---
+server:
+    port: 8080
+    
+spring:
+    datasource:
+        driver-class-name: com.mysql.jdbc.Driver
+        username: rupesh
+        password: roope@
+        url: jdbc:mysql://db.bassure.guruofjava.com/rupesh
