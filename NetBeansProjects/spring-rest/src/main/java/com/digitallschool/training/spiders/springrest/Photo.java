@@ -52,7 +52,6 @@ public class Photo {
     public Photo(String title) {
         this.title = title;
     }
-
     
     
 }

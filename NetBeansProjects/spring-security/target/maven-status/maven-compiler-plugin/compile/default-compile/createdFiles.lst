@@ -1,2 +1,4 @@
-com/digitallschool/training/spiders/spring/security/UserController.class
+com/digitallschool/training/spiders/spring/security/MyWebSecurityConfig.class
 com/digitallschool/training/spiders/spring/security/SpringBootApplication.class
+com/digitallschool/training/spiders/spring/security/UserController.class
+com/digitallschool/training/spiders/spring/security/MyUserDetailsService.class

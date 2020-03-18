@@ -6,6 +6,8 @@
 package com.digitallschool.training.spiders.springrest.controller;
 
 import com.digitallschool.training.spiders.springrest.Candidate;
+import com.digitallschool.training.spiders.springrest.Mylogger;
+import static com.digitallschool.training.spiders.springrest.Mylogger.logger;
 import com.digitallschool.training.spiders.springrest.service.CandidateService;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -42,13 +44,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/candidate")
 public class CandidateController {
     
-    private static Logger logger=Logger.getLogger(CandidateController.class.getName());
-    Logger logger1=Logger.getLogger("vijay");
+//    private static Logger logger=Logger.getLogger(CandidateController.class.getName());
+//    Logger logger1=Logger.getLogger("vijay");
     @Autowired
     CandidateService ser;
 
     @GetMapping
     public List<Candidate> getCandidates() {
+        Mylogger.logger.entering("CandidateController","getCandidates");
       // logger.entering(getClass().getName(),"getCandidates");
        // List<Candidate> arr=ser.getAllCandidates();
        // System.out.println(arr);
@@ -57,8 +60,8 @@ public class CandidateController {
 //        System.out.println(logger1.getName());
 //        System.out.println(logger.getName());
 //        System.out.println(logger);
-           logger.log(Level.SEVERE,"my log {0},{1},{2}",new Object[]{"log","severe","worst"});
-          logger.addHandler(new ConsoleHandler());
+           //logger.log(Level.SEVERE,"my log {0},{1},{2}",new Object[]{"log","severe","worst"});
+        //  logger.addHandler(new ConsoleHandler());
            //logger.log(Level.SEVERE,"hello runtime",new RuntimeException("error"));
                    
         return ser.getAllCandidates();
@@ -96,11 +99,18 @@ public class CandidateController {
         ser.updateCandidate(id,candidate);
     }
     
+     @GetMapping("/search")
+    public List<Candidate> searchBy(@RequestParam("skills") String primarySkills,
+            @RequestParam("exp") String tex,@RequestParam("location") String address )
+    {
+        return null;
+    }
+    
     @ModelAttribute("candidate")
     public Candidate setCandidate(){
         return new Candidate();
     }
     
-    
+   
 
 }
