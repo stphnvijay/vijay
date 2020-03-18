@@ -17,32 +17,21 @@ import java.util.stream.Collectors;
  * @author stphnvijay07
  */
 public class CandidateOperations {
-   
-    public static List<Candidate> search(List<Candidate> candidate,List<String> skills,List<String> location,float fromExp,float toExp){
-        List<Candidate> can = new ArrayList<>();
-        Consumer<Candidate> csmr=e->System.out.println(e);
-//        Consumer<Candidate> csmr1=e->can.add(e);
-        /*Predicate<Candidate> prdct=e->
-            skills.stream().anyMatch(s->e.getSkill().contains(s));*/
-        return candidate.stream().filter(e->predicateConditionSki(skills,e)).filter(e->predicateConditionLoc(location, e)).collect(Collectors.toList());
-       //candidate.stream().filter(e->e.getName().contains("vijay")).forEach(csmr);
-        
-       
-    }
-    
-    public static boolean predicateConditionSki(List<String> skills,Candidate e){
-                
-            return skills.stream().anyMatch(s->e.getSkill().contains(s));
-        }
-    
-    
-    public static boolean predicateConditionLoc(List<String> location,Candidate e){
-                Consumer<Candidate> csmr=h->System.out.println(h);
-            return location.stream().anyMatch(s->e.getLocation().contains(s)||e.getLocation().isEmpty());
-        }
+
+    public static List<Candidate> search(List<Candidate> candidate, List<String> skills, List<String> location, float fromExp, float toExp) {
+
+        return candidate.stream().filter(e -> predicateConditionSki(skills, e)).filter(e -> predicateConditionLoc(location, e)).collect(Collectors.toList());
+
     }
 
-   
-    
-    
+    public static boolean predicateConditionSki(List<String> skills, Candidate e) {
 
+        return skills.stream().anyMatch(s -> e.getSkill().contains(s));
+    }
+
+    public static boolean predicateConditionLoc(List<String> location, Candidate e) {
+
+        return location.stream().anyMatch(s -> (e.getLocation().contains(s)) || (s.isEmpty()));
+
+    }
+}

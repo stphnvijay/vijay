@@ -27,7 +27,7 @@ public class CandidateDemo {
       
       //  System.out.println(candidate);
         
-        System.out.println(CandidateOperations.search(candidate,new ArrayList<String>(Arrays.asList("react","C")),new ArrayList<String>(Arrays.asList()), 2, 4));
+        System.out.println(CandidateOperations.search(candidate,new ArrayList<String>(Arrays.asList("react","java")),new ArrayList<String>(Arrays.asList("Hyderabad")), 2, 4));
         
         
         

@@ -18,10 +18,8 @@ import java.util.function.Predicate;
 public class MyClass {
     
     public static void main(String[] args) throws InterruptedException {
-        String[] arr={"ravi","vijay","shankar","rupesh"};
-        List<String> names=Arrays.asList(arr);
-        names.removeIf(e->e.contains("vijay"));
-        
+       
+   
     }
     
     
